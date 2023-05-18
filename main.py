@@ -7,22 +7,18 @@ from flood_fill import floodFill
 from polygon import Polygon
 from constants import WIDTH_SCREEN, HEIGHT_SCREEN
 from colors import *
-from DDA_line import DDALine
+
 def main():
     pygame.init()
-    pygame.display.set_caption('Set Pixel')
+    pygame.display.set_caption('AP1')
     screen = pygame.display.set_mode((WIDTH_SCREEN, HEIGHT_SCREEN))
 
     p = Polygon()
-    p.insertPoint(50, 100)
-    p.insertPoint(100, 50)
-    p.insertPoint(150, 100)
-    p.insertPoint(120, 150)
-    p.insertPoint(80, 150)
-
+    p.insertPoint(100, 100)
+    p.insertPoint(150, 200)
+    p.insertPoint(50, 200)
     p.createPolygon(screen, ORANGE)
-
-    floodFill(screen, (70, 100), BLACK, RED)
+    p.fill(screen, BLUE)
 
     while True:
         for event in pygame.event.get():
