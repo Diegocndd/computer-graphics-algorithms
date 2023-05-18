@@ -1,4 +1,5 @@
 from bresenham_line import bresenhamLine
+from DDA_line import DDALine
 
 class Polygon :
     def __init__(self):
@@ -15,11 +16,11 @@ class Polygon :
             xf = self.points[i][0]
             yf = self.points[i][1]
 
-            bresenhamLine(img, (x, y), (xf, yf), color)
+            DDALine(img, (x, y), (xf, yf), color)
 
             x = self.points[i][0]
             y = self.points[i][1]
         
-        print((x, y), (self.points[0][0], self.points[0][1]))
+        # print((x, y), (self.points[0][0], self.points[0][1]))
 
-        bresenhamLine(img, (x, y), (self.points[0][0], self.points[0][1]), color)
+        DDALine(img, (x, y), (self.points[0][0], self.points[0][1]), color)
