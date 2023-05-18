@@ -4,6 +4,10 @@ def bresenhamLine(img, start, end, color):
     (xi, yi) = start
     (xf, yf) = end
 
+    if abs(xi - yi) > abs(xf - yf):
+        (xi, yi) = end
+        (xf, yf) = start
+
     dx = abs(xf - xi)
     dy = abs(yf - yi)
 
