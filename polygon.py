@@ -1,3 +1,4 @@
+import math
 from utils import minMatrix, maxMatrix, intersection, findPivot
 from DDA_line import DDALine
 from pixel import setPixel
@@ -10,10 +11,10 @@ class Polygon :
         self.backgroundColor = backgroundColor
         self.points = points
 
-        self.createPolygon(img, borderColor)
-        self.fill(img, backgroundColor)
+        self.updatePolygon(img)
         
     def deletePolygon(self, img):
+        ''
         self.createPolygon(img, BLACK)
         self.fill(img, BLACK)
 
@@ -75,12 +76,15 @@ class Polygon :
                     for pixel in range(i[pi], i[pi + 1], -1):
                         setPixel(img, pixel, y, color)
 
-    # scale
     def scale(self, img, sx, sy):
-        pivot = findPivot(self.points)
+        self.deletePolygon(img)
+        self.calculateScale(img, sx, sy)
+        self.updatePolygon(img)
 
-        # move to 0 position
-        self.move(img, -pivot[0], -pivot[1])
+    # scale
+    def calculateScale(self, img, sx, sy):
+        # TODO: remover mock de 50
+        self.calculateMove(img, -50, -50)
 
         # apply scale
         new_points = []
@@ -88,26 +92,45 @@ class Polygon :
         for p in self.points:
             new_points.append([p[0] * sx, p[1] * sy])
 
-        self.deletePolygon(img)
-
         self.points = new_points
+        self.calculateMove(img, +50, +50)
 
+    def updatePolygon(self, img):
         self.createPolygon(img, self.borderColor)
         self.fill(img, self.backgroundColor)
 
-        #  return to initial position
-        self.move(img, pivot[0], pivot[1])
+    # rotation
+    def rotate(self, img, angle):
+        self.deletePolygon(img)
+        self.calculateRotation(img, angle)
+        self.updatePolygon(img)
+
+    def calculateRotation(self, img, angle):
+        # TODO: remover mock de 50
+        self.calculateMove(img, -50, -50)
+
+        new_points = []
+        angle = math.radians(angle)
+
+        for p in self.points:
+            x2 = (round((p[0] * math.cos(angle)) - (p[1] * math.sin(angle))))
+            y2 = (round((p[0] * math.sin(angle)) + (p[1] * math.cos(angle))))
+            new_points.append([x2, y2])
+
+        self.points = new_points
+
+        self.calculateMove(img, +50, +50)
+
+    def move(self, img, x, y):
+        self.deletePolygon(img)
+        self.calculateMove(img, x, y)
+        self.updatePolygon(img)
 
     # translation
-    def move(self, img, x, y):
+    def calculateMove(self, img, x, y):
         new_points = []
 
         for p in self.points:
             new_points.append([p[0] + x, p[1] + y])
 
-        self.deletePolygon(img)
-
         self.points = new_points
-
-        self.createPolygon(img, self.borderColor)
-        self.fill(img, self.backgroundColor)

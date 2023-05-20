@@ -1,4 +1,5 @@
 import pygame
+import time
 from pixel import setPixel, getPixel
 from bresenham_line import bresenhamLine
 from bresenham_circle import bresenhamCircle
@@ -20,7 +21,11 @@ def main():
     pygame.display.set_caption('AP1')
     screen = pygame.display.set_mode((WIDTH_SCREEN, HEIGHT_SCREEN))
 
-    p = Polygon(img=screen, points=[[1, 1], [10, 1], [10, 10], [1, 10]], backgroundColor=RED, borderColor=GREEN)
+    # p = Polygon(img=screen, points=[[1, 1], [10, 1], [10, 10], [1, 10]], backgroundColor=RED, borderColor=GREEN)
+
+    # p = Polygon(img=screen, points=[[50, 50], [100, 50], [100, 100], [50, 100]], backgroundColor=RED, borderColor=GREEN)
+    p = Polygon(img=screen, points=[[40, 40], [60, 40], [60, 60], [40, 60]], backgroundColor=RED, borderColor=GREEN)
+    # p = Polygon(img=screen, points=[[6, 13], [13, 6], [6, 13], [13, 6]], backgroundColor=RED, borderColor=BLUE)
 
     while True:
         for event in pygame.event.get():
@@ -37,6 +42,13 @@ def main():
                     p.move(screen, 0, 1)
                 if event.key == pygame.K_SPACE:
                     p.scale(screen, 2, 2)
+                if event.key == pygame.K_a:
+                    # p.move(screen, -40, -40)
+
+                    p.rotate(screen, 20)
+
+        # p.rotate(screen, 1)
+        # time.sleep(0.5)
         pygame.display.update()
      
 if __name__=="__main__":
