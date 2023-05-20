@@ -2,17 +2,21 @@ from utils import minMatrix, maxMatrix, intersection
 from DDA_line import DDALine
 from pixel import setPixel
 from DDA_line import DDALine
+from colors import BLACK
 
 class Polygon :
-    def __init__(self):
-        self.points = []
-    
-    def getPoints(self):
-        return self.points
+    def __init__(self, img, points, borderColor, backgroundColor):
+        self.borderColor = borderColor
+        self.backgroundColor = backgroundColor
+        self.points = points
 
-    def insertPoint(self, x, y):
-        self.points.append([x, y])
-    
+        self.createPolygon(img, borderColor)
+        self.fill(img, backgroundColor)
+        
+    def deletePolygon(self, img):
+        self.createPolygon(img, BLACK)
+        self.fill(img, BLACK)
+
     def createPolygon(self, img, color):
         x = self.points[0][0]
         y = self.points[0][1]
@@ -26,9 +30,10 @@ class Polygon :
             x = self.points[i][0]
             y = self.points[i][1]
         
-        # print((x, y), (self.points[0][0], self.points[0][1]))
-
         DDALine(img, (x, y), (self.points[0][0], self.points[0][1]), color)
+
+    def getPoints(self):
+        return self.points
 
     # scanline
     def fill(self, img, color):
@@ -69,3 +74,17 @@ class Polygon :
                 for pi in range(0, len(i), 2):
                     for pixel in range(i[pi], i[pi + 1], -1):
                         setPixel(img, pixel, y, color)
+
+    # rotation
+    def move(self, img, x, y):
+        new_points = []
+
+        for p in self.points:
+            new_points.append([p[0] + x, p[1] + y])
+
+        self.deletePolygon(img)
+
+        self.points = new_points
+
+        self.createPolygon(img, self.borderColor)
+        self.fill(img, self.backgroundColor)
