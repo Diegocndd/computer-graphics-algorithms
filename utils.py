@@ -46,3 +46,24 @@ def maxMatrix(m):
         maxList.append(max)
 
     return maxList        
+
+def findPivot(m):
+    lessX = m[0]
+
+    for i in m:
+        if lessX[0] > i[0]:
+            lessX = i
+
+    less = []
+
+    for i in m:
+        if i[0] == lessX[0]:
+            less.append(i)
+
+    lessY = less[0]
+
+    for i in less:
+        if lessY[1] > i[1]:
+            lessY = i
+
+    return lessY

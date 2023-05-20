@@ -14,11 +14,13 @@ def cleanScreen(img):
             setPixel(img=img, x=i, y=j, color=BLACK)
 
 def main():
+    #TODO: consertar escala em números racionais
+
     pygame.init()
     pygame.display.set_caption('AP1')
     screen = pygame.display.set_mode((WIDTH_SCREEN, HEIGHT_SCREEN))
 
-    p = Polygon(img=screen, points=[[100, 100], [200, 100], [200, 200], [100, 200]], backgroundColor=RED, borderColor=GREEN)
+    p = Polygon(img=screen, points=[[1, 1], [10, 1], [10, 10], [1, 10]], backgroundColor=RED, borderColor=GREEN)
 
     while True:
         for event in pygame.event.get():
@@ -33,6 +35,8 @@ def main():
                     p.move(screen, 0, -1)
                 if event.key == pygame.K_DOWN:
                     p.move(screen, 0, 1)
+                if event.key == pygame.K_SPACE:
+                    p.scale(screen, 2, 2)
         pygame.display.update()
      
 if __name__=="__main__":

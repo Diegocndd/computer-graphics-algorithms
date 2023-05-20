@@ -1,4 +1,4 @@
-from utils import minMatrix, maxMatrix, intersection
+from utils import minMatrix, maxMatrix, intersection, findPivot
 from DDA_line import DDALine
 from pixel import setPixel
 from DDA_line import DDALine
@@ -75,7 +75,30 @@ class Polygon :
                     for pixel in range(i[pi], i[pi + 1], -1):
                         setPixel(img, pixel, y, color)
 
-    # rotation
+    # scale
+    def scale(self, img, sx, sy):
+        pivot = findPivot(self.points)
+
+        # move to 0 position
+        self.move(img, -pivot[0], -pivot[1])
+
+        # apply scale
+        new_points = []
+
+        for p in self.points:
+            new_points.append([p[0] * sx, p[1] * sy])
+
+        self.deletePolygon(img)
+
+        self.points = new_points
+
+        self.createPolygon(img, self.borderColor)
+        self.fill(img, self.backgroundColor)
+
+        #  return to initial position
+        self.move(img, pivot[0], pivot[1])
+
+    # translation
     def move(self, img, x, y):
         new_points = []
 
