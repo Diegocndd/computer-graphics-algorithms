@@ -24,28 +24,32 @@ def main():
     # p = Polygon(img=screen, points=[[1, 1], [10, 1], [10, 10], [1, 10]], backgroundColor=RED, borderColor=GREEN)
 
     # p = Polygon(img=screen, points=[[50, 50], [100, 50], [100, 100], [50, 100]], backgroundColor=RED, borderColor=GREEN)
-    p = Polygon(img=screen, points=[[40, 40], [60, 40], [60, 60], [40, 60]], backgroundColor=RED, borderColor=GREEN)
+    # p = Polygon(img=screen, points=[[40, 40], [60, 40], [60, 60], [40, 60]], backgroundColor=RED, borderColor=GREEN)
     # p = Polygon(img=screen, points=[[6, 13], [13, 6], [6, 13], [13, 6]], backgroundColor=RED, borderColor=BLUE)
+
+    bresenhamEllipse(screen, (100, 100), 50, 60, RED)    
+
+    bresenhamCircle(screen, (100, 100), 30, RED)    
 
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    p.move(screen, -1, 0)
-                if event.key == pygame.K_RIGHT:
-                    p.move(screen, 1, 0)
-                if event.key == pygame.K_UP:
-                    p.move(screen, 0, -1)
-                if event.key == pygame.K_DOWN:
-                    p.move(screen, 0, 1)
-                if event.key == pygame.K_SPACE:
-                    p.scale(screen, 2, 2)
-                if event.key == pygame.K_a:
-                    # p.move(screen, -40, -40)
+            # elif event.type == pygame.KEYDOWN:
+            #     if event.key == pygame.K_LEFT:
+            #         p.move(screen, -1, 0)
+            #     if event.key == pygame.K_RIGHT:
+            #         p.move(screen, 1, 0)
+            #     if event.key == pygame.K_UP:
+            #         p.move(screen, 0, -1)
+            #     if event.key == pygame.K_DOWN:
+            #         p.move(screen, 0, 1)
+            #     if event.key == pygame.K_SPACE:
+            #         p.scale(screen, 2, 2)
+            #     if event.key == pygame.K_a:
+            #         # p.move(screen, -40, -40)
 
-                    p.rotate(screen, 20)
+            #         p.rotate(screen, 20)
 
         # p.rotate(screen, 1)
         # time.sleep(0.5)
