@@ -5,14 +5,35 @@ from pixel import setPixel
 from DDA_line import DDALine
 from colors import BLACK
 
-class Polygon :
+class Polygon:
     def __init__(self, img, points, borderColor, backgroundColor):
         self.borderColor = borderColor
         self.backgroundColor = backgroundColor
         self.points = points
 
         self.updatePolygon(img)
-        
+
+    def verifyCollision(self, p):
+        points = self.getPoints()
+        p_points = p.getPoints()
+
+        p_alpha = p_points[0][0]
+        p_betha = p_points[0][1]
+        p_delta = p_points[2][1]
+        p_gama = p_points[2][0]
+
+        alpha = points[0][0]
+        betha = points[0][1]
+        delta = points[2][1]
+        gama = points[2][0]
+
+        y_collision = abs(p_betha - betha) <= abs(p_betha - p_delta)
+        x_collision = abs(p_gama - gama) <= abs(p_gama - p_alpha)
+
+        if x_collision and y_collision:
+            print('collision')
+            'collision'
+
     def deletePolygon(self, img):
         ''
         self.createPolygon(img, BLACK)
