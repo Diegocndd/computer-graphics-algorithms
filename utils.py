@@ -1,4 +1,34 @@
-def intersection(scan, seg):
+from PIL import Image
+
+"""
+    :param      int[][] texture
+    :param      int     x
+    :param      int     y
+    :return:    int     value of the pixel (x,y) in texture matrix
+"""
+def getPixelFromTexture(texture, x, y):
+    if x > 1:
+        x = 1
+    if x < 0:
+        x = 0
+    if y > 1:
+        y = 1
+    if y < 0:
+        y = 0
+    
+    width = 800
+    height = 800
+    x = round(x * (width - 1) + 1)
+    y = round(y * (height - 1) + 1)
+
+    return texture[x, y]
+
+def loadTexture(path):
+    im = Image.open(path)
+    pixels = im.load()
+    return pixels
+
+def oldintersection(scan, seg):
     xi = seg[0][0]
     yi = seg[0][1]
     xf = seg[1][0]
@@ -22,6 +52,32 @@ def intersection(scan, seg):
         return xi + t * (xf - xi)
     
     return -1
+
+def intersection(scan, seg):
+    pi = seg[0]
+    pf = seg[1]
+
+    y = scan
+
+    if pi[1] == pf[1]:
+        return (-1, 0, 0, 0)
+
+    if pi[1] > pf[1]:
+        aux = pi
+        pi = pf
+        pf = aux
+    
+    t = (y - pi[1]) / (pf[1] - pi[1])
+
+    if t > 0 and t <= 1:
+        x = pi[0] + t * (pf[0] - pi[0])
+
+        tx = pi[2] + t * (pf[2] - pi[2])
+        ty = pi[3] + t * (pf[3] - pi[3])
+
+        return (round(x), y, tx, ty)
+    
+    return (-1, 0, 0, 0)
 
 def minMatrix(m):
     minList = []

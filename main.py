@@ -4,7 +4,9 @@ from pixel import setPixel, getPixel
 from bresenham_line import bresenhamLine
 from bresenham_circle import bresenhamCircle
 from bresenham_ellipse import bresenhamEllipse
+from utils import loadTexture
 from flood_fill import floodFill
+from DDA_line import DDALine
 from polygon import Polygon
 from constants import WIDTH_SCREEN, HEIGHT_SCREEN
 from colors import *
@@ -27,32 +29,27 @@ def main():
     # p = Polygon(img=screen, points=[[40, 40], [60, 40], [60, 60], [40, 60]], backgroundColor=RED, borderColor=GREEN)
     # p = Polygon(img=screen, points=[[6, 13], [13, 6], [6, 13], [13, 6]], backgroundColor=RED, borderColor=BLUE)
 
-    bresenhamEllipse(screen, (100, 100), 50, 60, RED)    
+    # p = Polygon(img=screen, points=[[150, 150, 0, 0], [250, 250, 1, 0], [50, 250, 1, 1]], backgroundColor=RED, borderColor=GREEN)
+    # p = Polygon(img=screen, points=[[70, 70, 0, 0], [200, 70, 1, 0], [200, 200, 1, 1], [70, 200, 0, 1]], borderColor=GREEN, backgroundColor=RED)
+    p = Polygon(img=screen, points=[[70, 70, 0, 0], [200, 70, 1, 0], [200, 200, 1, 1], [70, 200, 0, 1]], borderColor=GREEN, texture=loadTexture('cat.jpeg'))
 
-    bresenhamCircle(screen, (100, 100), 30, RED)    
 
+    # p = Polygon(img=screen, points=[[30, 30, 0, 0], [50, 30, 1, 0], [50, 50, 1, 1], [30, 50, 0, 1]], borderColor=GREEN, backgroundColor=RED)
+
+    # DDALine(screen, (200, 70), (200, 200), RED)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-            # elif event.type == pygame.KEYDOWN:
-            #     if event.key == pygame.K_LEFT:
-            #         p.move(screen, -1, 0)
-            #     if event.key == pygame.K_RIGHT:
-            #         p.move(screen, 1, 0)
-            #     if event.key == pygame.K_UP:
-            #         p.move(screen, 0, -1)
-            #     if event.key == pygame.K_DOWN:
-            #         p.move(screen, 0, 1)
-            #     if event.key == pygame.K_SPACE:
-            #         p.scale(screen, 2, 2)
-            #     if event.key == pygame.K_a:
-            #         # p.move(screen, -40, -40)
-
-            #         p.rotate(screen, 20)
-
-        # p.rotate(screen, 1)
-        # time.sleep(0.5)
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    p.move(screen, -4, 0)
+                if event.key == pygame.K_RIGHT:
+                    p.move(screen, 4, 0)
+                if event.key == pygame.K_UP:
+                    p.move(screen, 0, -4)
+                if event.key == pygame.K_DOWN:
+                    p.move(screen, 0, 4)
         pygame.display.update()
      
 if __name__=="__main__":
