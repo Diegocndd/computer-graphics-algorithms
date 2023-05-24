@@ -22,21 +22,9 @@ def main():
     pygame.init()
     pygame.display.set_caption('AP1')
     screen = pygame.display.set_mode((WIDTH_SCREEN, HEIGHT_SCREEN))
-
-    # p = Polygon(img=screen, points=[[1, 1], [10, 1], [10, 10], [1, 10]], backgroundColor=RED, borderColor=GREEN)
-
-    # p = Polygon(img=screen, points=[[50, 50], [100, 50], [100, 100], [50, 100]], backgroundColor=RED, borderColor=GREEN)
-    # p = Polygon(img=screen, points=[[40, 40], [60, 40], [60, 60], [40, 60]], backgroundColor=RED, borderColor=GREEN)
-    # p = Polygon(img=screen, points=[[6, 13], [13, 6], [6, 13], [13, 6]], backgroundColor=RED, borderColor=BLUE)
-
-    # p = Polygon(img=screen, points=[[150, 150, 0, 0], [250, 250, 1, 0], [50, 250, 1, 1]], backgroundColor=RED, borderColor=GREEN)
-    # p = Polygon(img=screen, points=[[70, 70, 0, 0], [200, 70, 1, 0], [200, 200, 1, 1], [70, 200, 0, 1]], borderColor=GREEN, backgroundColor=RED)
+    
     p = Polygon(img=screen, points=[[70, 70, 0, 0], [200, 70, 1, 0], [200, 200, 1, 1], [70, 200, 0, 1]], borderColor=GREEN, texture=loadTexture('cat.jpeg'))
 
-
-    # p = Polygon(img=screen, points=[[30, 30, 0, 0], [50, 30, 1, 0], [50, 50, 1, 1], [30, 50, 0, 1]], borderColor=GREEN, backgroundColor=RED)
-
-    # DDALine(screen, (200, 70), (200, 200), RED)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
