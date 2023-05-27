@@ -18,7 +18,25 @@ class Polygon :
             self.fill(img, backgroundColor)
 
         self.updatePolygon(img)
-        
+
+    def verifyCollision(self, p):
+        points = self.getPoints()
+        p_points = p.getPoints()
+
+        p_alpha = p_points[0][0]
+        p_betha = p_points[0][1]
+        p_delta = p_points[2][1]
+        p_gama = p_points[2][0]
+
+        alpha = points[0][0]
+        betha = points[0][1]
+        delta = points[2][1]
+        gama = points[2][0]
+
+        y_collision = (betha > p_betha and betha < p_delta) or (delta > p_betha and delta < p_delta)
+        x_collision = (alpha < p_gama and alpha > p_alpha) or (gama < p_gama and gama > p_alpha)
+        return x_collision and y_collision
+            
     def deletePolygon(self, img):
         self.createPolygon(img, BLACK)
         self.fill(img, BLACK)
