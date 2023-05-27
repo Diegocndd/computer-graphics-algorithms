@@ -16,6 +16,41 @@ def cleanScreen(img):
         for j in range(0, HEIGHT_SCREEN):
             setPixel(img=img, x=i, y=j, color=BLACK)
 
+def initScreen(img):
+    halfHeight = round(HEIGHT_SCREEN / 2)
+    halfWidth = round(WIDTH_SCREEN / 2)
+    bresenhamEllipse(img, (halfWidth, halfHeight), 200, 100, RED)
+    bresenhamCircle(img, (halfWidth, halfHeight), 200, RED)
+    floodFill(img, (halfWidth, halfHeight + 2), BLACK, BLUE)
+    floodFill(img, (halfWidth, round(halfHeight - halfHeight / 2)), BLACK, RED)
+    floodFill(img, (halfWidth, round(halfHeight + halfHeight / 2)), BLACK, RED)
+
+def drawLetter(img, letter, point, size = 1, fontColor = WHITE):
+    x, y = point
+    if letter == 'B':
+        height = 6
+
+        for i in range(height):
+            setPixel(img, x, y - i, fontColor)
+        setPixel(img, x + 1, y, fontColor)
+        setPixel(img, x + 2, y, fontColor)
+
+        setPixel(img, x + 1, y - 3, fontColor)
+        setPixel(img, x + 2, y - 3, fontColor)
+
+        setPixel(img, x + 1, y - 3, fontColor)
+        setPixel(img, x + 2, y - 3, fontColor)
+
+        setPixel(img, x + 4, y - 1, fontColor)
+        setPixel(img, x + 4, y - 2, fontColor)
+
+        setPixel(img, x + 4, y - 4, fontColor)
+        setPixel(img, x + 4, y - 5, fontColor)
+
+        setPixel(img, x + 1, y - 6, fontColor)
+        setPixel(img, x + 2, y - 6, fontColor)
+
+
 def main():
     #TODO: consertar escala em números racionais
 
@@ -23,8 +58,10 @@ def main():
     pygame.display.set_caption('AP1')
     screen = pygame.display.set_mode((WIDTH_SCREEN, HEIGHT_SCREEN))
     
-    p = Polygon(img=screen, points=[[70, 70, 0, 0], [200, 70, 1, 0], [200, 200, 1, 1], [70, 200, 0, 1]], borderColor=GREEN, texture=loadTexture('cat.jpeg'))
+    # p = Polygon(img=screen, points=[[70, 70, 0, 0], [200, 70, 1, 0], [200, 200, 1, 1], [70, 200, 0, 1]], borderColor=GREEN, texture=loadTexture('cat.jpeg'))
 
+    # initScreen(screen)
+    drawLetter(screen, 'B', (100, 100), size=3, fontColor=RED)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
