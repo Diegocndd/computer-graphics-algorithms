@@ -16,8 +16,8 @@ def getPixelFromTexture(texture, x, y):
     if y < 0:
         y = 0
     
-    width = 800
-    height = 800
+    width = 200
+    height = 200
     x = round(x * (width - 1) + 1)
     y = round(y * (height - 1) + 1)
 
