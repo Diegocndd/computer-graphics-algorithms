@@ -7,4 +7,11 @@ def map_window(p, w, v):
   xf = j[2]
   yf = j[3]
   
-  m = [lv / (xf - xi), 0, (1 - xi * lv
+  m = [0] * 3
+  m = m * 3
+  m[0][0] = lv/(xf-xi)
+  m[0][2] = (1 - xi*lv/(xf-xi))
+  m[1][1] = av/(yf-yi)
+  m[1][2] = (1 - yi*av/(yf-yi))
+  m[2][2] = 1
+  
